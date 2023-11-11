@@ -8,20 +8,19 @@
 </head>
 
 <body>
-    <button onclick="toggleElement()">Click Me</button>
+    <button onclick="app.toggleElement()">Click Me</button>
     <div @collapsableElement></div>
 
     <script>
-        function toggleElement() {
-            if (app.collapsableElement) {
-                app.collapsableElement = null;
-            } else {
-                app.collapsableElement = "<h1>Hello World</h1>";
-            }
-        }
-    
         const app = new Component({
             collapsableElement: null,
+            toggleElement: () => {
+                if (app.collapsableElement) {
+                    app.collapsableElement = null;
+                    return;
+                }
+                app.collapsableElement = "<h1>Hello World</h1>";
+            }
         });
     </script>
 </body>
