@@ -10,8 +10,8 @@
 <body>
     <main>
         <nav>
-            <button onclick="app.setPage(pageOne)">Home</button>
-            <button onclick="app.setPage(pageTwo)">About</button>
+            <button onclick="app.setPage(homePage)">Home</button>
+            <button onclick="app.setPage(aboutPage)">About</button>
         </nav>
 
         <div>
@@ -21,19 +21,19 @@
     </main>
 
     <script>
-        const pageOne = {
+        const homePage = {
             name: "Home",
             description: "This is the home page",
         };
 
-        const pageTwo = {
+        const aboutPage = {
             name: "About",
             description: "About this company",
         };
 
         const app = new Component({
-            name: pageOne.name,
-            description: pageOne.description,
+            name: homePage.name,
+            description: homePage.description,
             setPage: (value) => {
                 app.name = value.name;
                 app.description = value.description;
