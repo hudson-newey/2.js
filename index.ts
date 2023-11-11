@@ -1,18 +1,22 @@
-class Component {
-  constructor(data) {
-    Object.keys(data).forEach((key) => {
-      let privateValue = data[key];
+interface IComponent {
+  [key: string]: any;
+}
 
-      const identityFunction = (x) => x;
-      const operatorFunction =
+class Component {
+  constructor(data: Record<string, unknown>) {
+    Object.keys(data).forEach((key: string) => {
+      let privateValue: any = data[key as keyof typeof data];
+
+      const identityFunction = (x: unknown) => x;
+      const operatorFunction: Function =
         typeof privateValue === "function" ? privateValue : identityFunction;
 
       Object.defineProperty(this, key, {
         // called when methods are called
-        get() {
+        get(): unknown {
           return privateValue;
         },
-        set(value) {
+        set(value): void {
           privateValue = operatorFunction(value);
 
           // binding by DOM attributes
