@@ -10,8 +10,19 @@ class Component {
         set(value) {
           privateValue = value;
 
-          const modelElements = document.querySelectorAll(`[\\@${key}]`);
+          // binding by DOM attributes
+          if (key.startsWith("#") || key.startsWith(".") || key.startsWith("[")) {
+            const elements = document.querySelectorAll(key);
 
+            elements.forEach((element) => {
+              element.innerHTML = value;
+            });
+
+            return;
+          }
+
+          // custom @key binded attributes
+          const modelElements = document.querySelectorAll(`[\\@${key}]`);
           modelElements.forEach((element) => {
             element.innerHTML = value;
           });

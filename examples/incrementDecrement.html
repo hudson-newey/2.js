@@ -9,14 +9,14 @@
 
 <body>
     <h1>Increment-Decrement Example</h1>
-    <p>Count: <span @count></span></p>
-    <button onclick="page.count++">Increment</button>
-    <button onclick="page.count--">Decrement</button>
+    <p>Count: <span id="count-output"></span></p>
+    <button onclick="page['#count-output']++">Increment</button>
+    <button onclick="page['#count-output']--">Decrement</button>
 </body>
 
 <script>
     const page = new Component({
-        count: 0,
+        "#count-output": 0,
     });
 </script>
 </html>
