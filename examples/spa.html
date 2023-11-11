@@ -4,8 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2.js - SPA</title>
+    <script src="../index.js"></script>
 </head>
 
 <body>
+    <main>
+        <nav>
+            <button onclick="app.setPage(pageOne)">Page 1</button>
+            <button onclick="app.setPage(pageTwo)">Page 2</button>
+        </nav>
+
+        <div>
+            <h1 @name></h1>
+            <p @description></p>
+        </div>
+    </main>
+
+    <script>
+        const pageOne = {
+            name: "Home",
+            description: "This is the home page",
+        };
+
+        const pageTwo = {
+            name: "About",
+            description: "About this company",
+        };
+
+        const app = new Component({
+            name: pageOne.name,
+            description: pageOne.description,
+            setPage: (value) => {
+                app.name = value.name;
+                app.description = value.description;
+            },
+        });
+    </script>
 </body>
 </html>

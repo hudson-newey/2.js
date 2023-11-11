@@ -14,13 +14,8 @@
     <script>
         const app = new Component({
             collapsableElement: null,
-            toggleElement: () => {
-                if (app.collapsableElement) {
-                    app.collapsableElement = null;
-                    return;
-                }
-                app.collapsableElement = "<h1>Hello World</h1>";
-            }
+            toggleElement: () =>
+                app.collapsableElement = app.collapsableElement ? null : "<h1>Hello World</h1>",
         });
     </script>
 </body>
