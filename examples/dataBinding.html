@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.js - Data Binding</title>
+    <script src="../index.js"></script>
+  </head>
+
+  <body>
+    <label for="name-input"></label>
+    <input
+      id="name-input"
+      type="text"
+      onkeyup="app.name = event.target.value"
+    />
+
+    <h1>Hello <span @name></span></h1>
+
+    <script>
+      const app = new Component({
+        name: "",
+      });
+    </script>
+  </body>
+</html>
