@@ -25,11 +25,7 @@
     <script>
         // TODO: this example is likely to change once I implement flow dependencies
         const app = new Component({
-            todoItems: [
-                "todo 1",
-                "todo 2",
-                "todo 3",
-            ],
+            todoItems: [],
             addTodoItem: () => {
                 app.todoItems.push(document.getElementById("taskNameInput").value);
                 app.todoListTemplate = app.todoItems;
