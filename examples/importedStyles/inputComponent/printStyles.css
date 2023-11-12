@@ -1,0 +1,5 @@
+@media print {
+    .customInputComponent {
+        display: none;
+    }
+}
