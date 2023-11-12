@@ -62,3 +62,18 @@ const app = new Component({
 ```
 
 Updating `foo` should also update references to `bar` (I think)
+
+## Implicit two way data bindings (not implemented)
+
+This is currently a WIP, I have not decided on this syntax
+
+```html
+<input @model>
+<p>Hello <span @model></span></p>
+
+<script>
+  const app = new Component({
+    model: "",
+  });
+</script>
+```

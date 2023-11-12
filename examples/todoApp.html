@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.js - Todo App</title>
+    <script src="../dist/index.js"></script>
+</head>
+
+<body>
+    <h1>My Todo App</h1>
+    
+    <div>
+        <h2>Add Todo Item</h2>
+        
+        <input id="taskNameInput" type="text">
+        <button onclick="app.addTodoItem()">Add Todo Item</button>
+    </div>
+
+    <div>
+        <h2>Todo Items</h2>
+        <div @todoListTemplate></div>
+    </div>
+
+    <script>
+        // TODO: this example is likely to change once I implement flow dependencies
+        const app = new Component({
+            todoItems: [
+                "todo 1",
+                "todo 2",
+                "todo 3",
+            ],
+            addTodoItem: () => {
+                app.todoItems.push(document.getElementById("taskNameInput").value);
+                app.todoListTemplate = app.todoItems;
+            },
+            todoListTemplate: (incomingTodoItems) => {
+                app.todoItems = incomingTodoItems;
+
+                return `
+                    <ul>
+                        ${app.todoItems.map((todo) => "<li>" + todo + "</li>").join("")}
+                    </ul>
+                `;
+            },
+        });
+    </script>
+</body>
+</html>
