@@ -47,6 +47,32 @@ OR
 </script>
 ```
 
+### For Loops
+
+```html
+<h1>My Shopping List</h1>
+<div @shoppingListTemplate></div>
+
+<script>
+    const shoppingItems = [
+        "bread",
+        "milk",
+        "eggs",
+        "cheese",
+        "butter",
+        "chicken",
+    ];
+
+    const app = new Component({
+    shoppingListTemplate: `
+        <ul>
+            ${shoppingItems.map((item) => "<li>" + item + "</li>").join("")}
+        </ul>
+    `,
+    });
+</script>
+```
+
 ### Single Page Application (SPA)
 
 ```html
