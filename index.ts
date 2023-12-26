@@ -82,18 +82,3 @@ class Component<T> implements IComponent {
     Object.assign(this, data);
   }
 }
-
-interface ITemplate {
-  [key: string]: any;
-  render(data: Record<string, any>): string;
-}
-
-class Template {
-  constructor(private template: string) {}
-
-  public render(data: Record<string, any>): string {
-    return this.template.replace(/\{\{(\w+)\}\}/g, (_, key) => {
-      return data[key];
-    });
-  }
-}
