@@ -10,6 +10,10 @@ function isTypeOperatorFunction<T>(
     return typeof value === "function";
 }
 
+function isBrowser(): boolean {
+    return typeof document !== "undefined";
+}
+
 module TwoJS {
     export type ComponentData<T> = Record<string, T>;
     export type OperatorFunction<T> = (value: any) => T;
@@ -47,29 +51,35 @@ module TwoJS {
                             ? privateValue.toString()
                             : (privateValue as string);
 
-                        // binding by document attributes (preferred)
-                        if (
-                            key.startsWith("#") ||
-                            key.startsWith(".") ||
-                            key.startsWith("[")
-                        ) {
-                            const elements: NodeListOf<HTMLElement> =
-                                document.querySelectorAll(key);
+                        // in certain cases (eg. using 2.js inside another SSR framework)
+                        // you may only want the 2.js reactivity and not DOM bindings
+                        // therefore, we check if the document exists before binding
+                        if (isBrowser()) {
+                            // binding by document attributes (preferred)
+                            if (
+                                key.startsWith("#") ||
+                                key.startsWith(".") ||
+                                key.startsWith("[")
+                            ) {
+                                const elements:
+                                    | NodeListOf<HTMLElement>
+                                    | any[] = document.querySelectorAll(key);
 
-                            elements.forEach((element: HTMLElement) => {
+                                elements.forEach((element: HTMLElement) => {
+                                    element.innerHTML = domValue;
+                                });
+
+                                return;
+                            }
+
+                            // custom @key binded attributes
+                            const modelElements = document.querySelectorAll(
+                                `[\\@${key}]`
+                            );
+                            modelElements.forEach((element) => {
                                 element.innerHTML = domValue;
                             });
-
-                            return;
                         }
-
-                        // custom @key binded attributes
-                        const modelElements = document.querySelectorAll(
-                            `[\\@${key}]`
-                        );
-                        modelElements.forEach((element) => {
-                            element.innerHTML = domValue;
-                        });
                     },
                 });
             });

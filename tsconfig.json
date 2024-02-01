@@ -1,6 +1,6 @@
 {
-    "include": ["src/**/*", "tests/**/*"],
-    "exclude": ["node_modules"],
+    "include": ["**/*"],
+    "exclude": ["node_modules", "**/*.spec.ts", "dist/"],
     "compilerOptions": {
         "baseUrl": "src",
         "target": "ES5",
@@ -15,7 +15,7 @@
         "declaration": true,
         "declarationMap": true,
         "moduleResolution": "node",
-        "outDir": "./dist/",
+        "outDir": "dist/",
         "paths": {
             "@/*": ["src/*"]
         }
