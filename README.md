@@ -1,6 +1,6 @@
 # 2.js
 
-A highly efficient **work in progress prototype** to bring reactive state to JavaScript with minimal overhead and bundle size that can be imported via HTML \<script src=""\> tags
+A highly efficient **work in progress prototype** to bring reactive state to JavaScript with minimal overhead and bundle size that can be imported via HTML `<script src="">` tags.
 
 ## Syntax
 

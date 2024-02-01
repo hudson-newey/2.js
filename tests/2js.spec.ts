@@ -1,6 +1,8 @@
 import { describe } from "@jest/globals";
-import { Component } from "../src/2js";
 import { test, expect } from "@jest/globals";
+
+// TODO: I need to figure a way to make this nicer to work with bundlers
+const Component = require("../src/2js");
 
 describe("Component", () => {
     test("creation", () => {
