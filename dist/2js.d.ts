@@ -7,4 +7,4 @@ declare function isTypeOperatorFunction<T>(value: T | OperatorFunction<T>): valu
 declare class Component<T> implements IComponent {
     constructor(data: ComponentData<T>);
 }
-//# sourceMappingURL=index.d.ts.map
+//# sourceMappingURL=2js.d.ts.map

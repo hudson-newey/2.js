@@ -1,7 +1,9 @@
 {
-    "include": ["src/**/*"],
+    "include": ["src/**/*", "tests/**/*"],
+    "exclude": ["node_modules"],
     "compilerOptions": {
-        "baseUrl": "./",
+        "baseUrl": "src",
+        "target": "ES5",
         "newLine": "lf",
         "module": "UMD",
         "lib": ["ES2023", "DOM"],
@@ -12,6 +14,10 @@
         "strict": true,
         "declaration": true,
         "declarationMap": true,
-        "outDir": "./dist/"
+        "moduleResolution": "node",
+        "outDir": "./dist/",
+        "paths": {
+            "@/*": ["src/*"]
+        }
     }
 }

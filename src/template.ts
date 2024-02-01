@@ -1,14 +1,14 @@
 interface ITemplate {
-  [key: string]: any;
-  render(data: Record<string, any>): string;
+    [key: string]: any;
+    render(data: Record<string, any>): string;
 }
 
 class Template {
-  constructor(protected template: string) {}
+    constructor(protected template: string) {}
 
-  public render(data: Record<string, any>): string {
-    return this.template.replace(/\{\{[ ]*(\w+)[ ]*\}\}/g, (_, key) => {
-      return data[key];
-    });
-  }
+    public render(data: Record<string, any>): string {
+        return this.template.replace(/\{\{[ ]*(\w+)[ ]*\}\}/g, (_, key) => {
+            return data[key];
+        });
+    }
 }
