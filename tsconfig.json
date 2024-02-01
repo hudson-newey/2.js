@@ -1,4 +1,5 @@
 {
+    "include": ["src/**/*"],
     "compilerOptions": {
         "baseUrl": "./",
         "newLine": "lf",
@@ -9,8 +10,8 @@
         "preserveConstEnums": true,
         "sourceMap": false,
         "strict": true,
-        "declaration": false,
+        "declaration": true,
+        "declarationMap": true,
         "outDir": "./dist/"
-    },
-    "include": ["**/*"]
+    }
 }

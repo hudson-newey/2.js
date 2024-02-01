@@ -20,7 +20,8 @@ var Component = (function () {
                 },
                 set: function (value) {
                     privateValue = operatorFunction(value);
-                    var domValue = (privateValue === null || privateValue === void 0 ? void 0 : privateValue.toString) ? privateValue.toString()
+                    var domValue = (privateValue === null || privateValue === void 0 ? void 0 : privateValue.toString)
+                        ? privateValue.toString()
                         : privateValue;
                     if (key.startsWith("#") ||
                         key.startsWith(".") ||
@@ -31,11 +32,11 @@ var Component = (function () {
                         });
                         return;
                     }
-                    var modelElements = document.querySelectorAll("[\\@" + key + "]");
+                    var modelElements = document.querySelectorAll("[\\@".concat(key, "]"));
                     modelElements.forEach(function (element) {
                         element.innerHTML = domValue;
                     });
-                }
+                },
             });
         });
         Object.keys(data).forEach(function (key) {
