@@ -1,12 +1,12 @@
 "use strict";
-var Template = (function () {
-    function Template(template) {
+class Template {
+    template;
+    constructor(template) {
         this.template = template;
     }
-    Template.prototype.render = function (data) {
-        return this.template.replace(/\{\{[ ]*(\w+)[ ]*\}\}/g, function (_, key) {
+    render(data) {
+        return this.template.replace(/\{\{[ ]*(\w+)[ ]*\}\}/g, (_, key) => {
             return data[key];
         });
-    };
-    return Template;
-}());
+    }
+}

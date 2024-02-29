@@ -5,52 +5,51 @@ function isTypeOperatorFunction(value) {
 function isBrowser() {
     return typeof document !== "undefined";
 }
-var Component = (function () {
-    function Component(data) {
-        var _this = this;
-        Object.keys(data).forEach(function (key) {
-            var privateValue = data[key];
-            var identityFunction = function (x) { return x; };
-            var operatorFunction = isTypeOperatorFunction(privateValue)
+const identityFunction = (x) => x;
+class Component {
+    constructor(data) {
+        Object.keys(data).forEach((key) => {
+            let privateValue = data[key];
+            const operatorFunction = isTypeOperatorFunction(privateValue)
                 ? privateValue
                 : identityFunction;
-            Object.defineProperty(_this, key, {
-                get: function () {
+            Object.defineProperty(this, key, {
+                get() {
                     if (!isTypeOperatorFunction(privateValue)) {
                         return privateValue;
                     }
                     return undefined;
                 },
-                set: function (value) {
+                set(value) {
                     privateValue = operatorFunction(value);
-                    var domValue = (privateValue === null || privateValue === void 0 ? void 0 : privateValue.toString)
+                    const domValue = privateValue?.toString
                         ? privateValue.toString()
                         : privateValue;
                     if (isBrowser()) {
                         if (key.startsWith("#") ||
                             key.startsWith(".") ||
                             key.startsWith("[")) {
-                            var elements = document.querySelectorAll(key);
-                            elements.forEach(function (element) {
+                            const elements = document.querySelectorAll(key);
+                            elements.forEach((element) => {
                                 element.innerHTML = domValue;
                             });
-                            return;
+                            return privateValue;
                         }
-                        var modelElements = document.querySelectorAll("[\\@".concat(key, "]"));
-                        modelElements.forEach(function (element) {
+                        const modelElements = document.querySelectorAll(`[\\@${key}]`);
+                        modelElements.forEach((element) => {
                             element.innerHTML = domValue;
                         });
                     }
+                    return privateValue;
                 },
             });
         });
-        Object.keys(data).forEach(function (key) {
+        Object.keys(data).forEach((key) => {
             if (isTypeOperatorFunction(data[key])) {
                 delete data[key];
             }
         });
         Object.assign(this, data);
     }
-    return Component;
-}());
+}
 module.exports = Component;

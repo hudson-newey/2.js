@@ -17,6 +17,9 @@ function isBrowser(): boolean {
 type ComponentData<T> = Record<string, T>;
 type OperatorFunction<T> = (value: any) => T;
 
+
+const identityFunction = <T>(x: T) => x;
+
 /**
  * @name Component
  * @interface IComponent
@@ -24,16 +27,15 @@ type OperatorFunction<T> = (value: any) => T;
  * A reactive state that can be bound to DOM elements
  */
 class Component<T> implements IComponent {
-    constructor(data: ComponentData<T>) {
+    public constructor(data: ComponentData<T>) {
         Object.keys(data).forEach((key: string) => {
             let privateValue: T | OperatorFunction<T> =
                 data[key as keyof typeof data];
 
-            const identityFunction = (x: T) => x;
             const operatorFunction: OperatorFunction<T> =
                 isTypeOperatorFunction(privateValue)
                     ? privateValue
-                    : identityFunction;
+                    : identityFunction<T>;
 
             Object.defineProperty(this, key, {
                 // called when methods are called
@@ -44,9 +46,9 @@ class Component<T> implements IComponent {
 
                     return undefined as T;
                 },
-                set(value: T): void {
-                    privateValue = operatorFunction(value);
-                    const domValue = privateValue?.toString
+                set(value: T): T {
+                    privateValue = operatorFunction(value) satisfies T;
+                    const domValue: string = privateValue?.toString
                         ? privateValue.toString()
                         : (privateValue as string);
 
@@ -60,18 +62,17 @@ class Component<T> implements IComponent {
                             key.startsWith(".") ||
                             key.startsWith("[")
                         ) {
-                            const elements:
-                                | NodeListOf<HTMLElement>
-                                | any[] = document.querySelectorAll(key);
+                            const elements: NodeListOf<HTMLElement> = document.querySelectorAll(key);
 
                             elements.forEach((element: HTMLElement) => {
                                 element.innerHTML = domValue;
                             });
 
-                            return;
+                            return privateValue;
                         }
 
                         // custom @key binded attributes
+                        // this is a special functionality case of 2.js
                         const modelElements = document.querySelectorAll(
                             `[\\@${key}]`
                         );
@@ -79,11 +80,13 @@ class Component<T> implements IComponent {
                             element.innerHTML = domValue;
                         });
                     }
+
+                    return privateValue;
                 },
             });
         });
 
-        // remove all functional properties from the data object
+        // remove all operator functions from this objects value
         Object.keys(data).forEach((key: string) => {
             if (isTypeOperatorFunction(data[key])) {
                 delete data[key];
