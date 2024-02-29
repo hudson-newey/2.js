@@ -96,7 +96,7 @@ class Component<T> implements IComponent {
                             element.innerHTML = domValue;
                         });
 
-                        return privateValue;
+                        return true;
                     }
 
                     // custom @key binded attributes
@@ -109,7 +109,7 @@ class Component<T> implements IComponent {
                     });
                 }
 
-                return privateValue;
+                return true;
             },
         });
 
