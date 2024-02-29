@@ -3,9 +3,9 @@
     "exclude": ["node_modules", "**/*.spec.ts", "dist/"],
     "compilerOptions": {
         "baseUrl": "src",
-        "target": "ES2022",
+        "target": "ES5",
         "newLine": "lf",
-        "module": "ES2022",
+        "module": "UMD",
         "lib": ["ES2023", "DOM"],
         "noImplicitAny": true,
         "removeComments": true,

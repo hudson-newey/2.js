@@ -1,11 +1,5 @@
 # Experimental Features
 
-## Templates
-
-HTML templates that support inline reactivity bindings.
-
-Implementation is subject to change and not recommended to use.
-
 ## Functional operatorators
 
 ```html
