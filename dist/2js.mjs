@@ -52,8 +52,7 @@ class Component {
             element.innerHTML = domValue;
           });
         }
-        console.log("aaaa");
-        return privateValue;
+        return true;
       }
     });
     Object.assign(proxy, data);

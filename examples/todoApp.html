@@ -1,45 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2.js - Todo App</title>
-    <script src="../dist/2js.mjs"></script>
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>2.js - Todo App</title>
+        <script src="../dist/2js.mjs"></script>
+    </head>
 
-<body>
-    <h1>My Todo App</h1>
+    <body>
+        <h1>Add Todo Item</h1>
 
-    <div>
-        <h2>Add Todo Item</h2>
-
-        <input id="taskNameInput" type="text">
+        <input
+            id="taskNameInput"
+            type="text"
+            onkeyup="((e) => e.key === 'Enter' && app.addTodoItem())(event)"
+        />
         <button onclick="app.addTodoItem()">Add Todo Item</button>
-    </div>
 
-    <div>
-        <h2>Todo Items</h2>
-        <div @todoListTemplate></div>
-    </div>
+        <div>
+            <h2>Todo Items</h2>
+            <div @todoListTemplate></div>
+        </div>
 
-    <script>
-        // TODO: this example is likely to change once I implement flow dependencies
-        const app = new Component({
-            todoItems: [],
-            addTodoItem: () => {
-                app.todoItems.push(document.getElementById("taskNameInput").value);
-                app.todoListTemplate = app.todoItems;
-            },
-            todoListTemplate: (incomingTodoItems) => {
-                app.todoItems = incomingTodoItems;
+        <script>
+            const app = new Component({
+                todoItems: [],
+                addTodoItem: () => {
+                    if (!taskNameInput.value) return;
 
-                return `
+                    app.todoItems.push(taskNameInput.value);
+
+                    // in the regular DOM model, whenever an element on the document is created with an id
+                    // eg. <input id="taskNameInput" />
+                    // a variable is created in the global scope with the same name as the id
+                    // this variable can be used to access the element directly without document.getElementById()
+                    app.todoListTemplate = app.todoItems;
+                    taskNameInput.value = "";
+                },
+                // this value has an "operator function"
+                // that means that any values assigned to it will be passed through the function first
+                // because this is technically a value, it can have DOM bindings
+                todoListTemplate: (incomingTodoItems) => `
                     <ul>
-                        ${app.todoItems.map((todo) => "<li>" + todo + "</li>").join("")}
+                        ${app.todoItems
+                            .map((item) => "<li>" + item + "</li>")
+                            .join("")}
                     </ul>
-                `;
-            },
-        });
-    </script>
-</body>
+                `,
+            });
+        </script>
+    </body>
 </html>

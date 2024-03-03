@@ -143,4 +143,20 @@ describe("Component", () => {
         // stringified output
         expect(component.sayHello()).toBe("Hello undefined!");
     });
+
+    test("javascript string templates", () => {
+        const component = new Component({
+            shoppingList: [
+                "Milk",
+                "Eggs",
+                "Bread",
+                "Butter",
+            ],
+            template: (shoppingList: string[]) => `Shopping list: ${shoppingList.join(", ")}`,
+        });
+
+        expect(component.template(component.shoppingList)).toBe(
+            "Shopping list: Milk, Eggs, Bread, Butter",
+        );
+    });
 });

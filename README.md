@@ -80,11 +80,11 @@ OR
     ];
 
     const app = new Component({
-    shoppingListTemplate: `
-        <ul>
-            ${shoppingItems.map((item) => "<li>" + item + "</li>").join("")}
-        </ul>
-    `,
+        shoppingListTemplate: `
+            <ul>
+                ${shoppingItems.map((item) => "<li>" + item + "</li>").join("")}
+            </ul>
+        `,
     });
 </script>
 ```
@@ -122,6 +122,49 @@ OR
             app.name = value.name;
             app.description = value.description;
         },
+    });
+</script>
+```
+
+### Simple Todo App
+
+```html
+<h1>Add Todo Item</h1>
+
+<input
+    id="taskNameInput"
+    type="text"
+    onkeyup="((e) => e.key === 'Enter' && app.addTodoItem())(event)"
+/>
+<button onclick="app.addTodoItem()">Add Todo Item</button>
+
+<div>
+    <h2>Todo Items</h2>
+    <div @todoListTemplate></div>
+</div>
+
+<script>
+    const app = new Component({
+        todoItems: [],
+        addTodoItem: () => {
+            if (!taskNameInput.value) return;
+
+            app.todoItems.push(taskNameInput.value);
+
+            // in the regular DOM model, whenever an element on the document is created with an id
+            // a variable is created in the global scope with the same name as the id
+            // this variable can be used to access the element directly without document.getElementById()
+            app.todoListTemplate = app.todoItems;
+            taskNameInput.value = "";
+        },
+        // this value has an "operator function"
+        // that means that any values assigned to it will be passed through the function first
+        // because this is technically a value, it can have DOM bindings
+        todoListTemplate: (incomingTodoItems) => `
+            <ul>
+                ${app.todoItems.map((item) => "<li>" + item + "</li>").join("")}
+            </ul>
+        `,
     });
 </script>
 ```
