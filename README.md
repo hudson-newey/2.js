@@ -2,7 +2,23 @@
 
 A highly efficient **work in progress prototype** to bring reactive state to JavaScript with minimal overhead and bundle size that can be imported via HTML `<script src="">` tags.
 
-## Syntax
+## But why another JS reactivity library?
+
+I have a hobby project called [NeonX2.0](https://grathium-industries.github.io/posts/deployments/NeonX2.0/login.html), it was originally written in 2017 (when I was just starting web programming) and open sourced in 2019.
+
+As a result, the codebase is a mess; using JQuery, vanilla JS, masonryJS, a lot of spaghetti code, and NO JAVASCRIPT FRAMEWORK.
+
+I've experimented with porting to Vue.js, but I deemed that the large bundle size, speed loss, compilation step, the need for a bundler, and the effort required was not worth it.
+
+Idealy, I'd like to progressively add reactivity to the project without converting the entire codebase to a new framework.
+
+Enter Preact.js, the perfect solution for my problem. It's lightweight, can be imported via a `<script src="">` tag and can be used to progressively add reactivity to my project without rewriting everything in an opinionated framework.
+
+However, the existing codebase interacted with the DOM directly, meaning that maintaining interoperability between old and new code styles would be highly abstracted.
+
+2.js aims to fix this by providing a simple, and lightweight reactivity library that can be imported via a `<script src="">` tag, used to progressively add reactivity to a project, and retain interoperability between `document.getElementById('id').innerHTML = 'Hello World'` style code.
+
+It also let me experiment with the concept of creating my own reactivity library.
 
 ### Minimal Increment-Decrement Counter
 

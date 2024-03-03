@@ -55,14 +55,6 @@ describe("Component", () => {
         );
     });
 
-    test("getting state of a operator function with no value", () => {
-        const component = new Component({
-            test: (value: string) => value.toUpperCase(),
-        });
-
-        expect(component.test).toBeUndefined();
-    });
-
     test("getting state of a non-existent property", () => {
         const component = new Component({});
         expect(component.test).toBeUndefined();
@@ -93,6 +85,7 @@ describe("Component", () => {
         expect(returnedValue).toBe("test2");
     });
 
+    // TODO: this functionality is not yet functional
     test("return values of operator functions", () => {
         const component = new Component({
             test: (value: string) => value.toUpperCase(),
@@ -120,5 +113,34 @@ describe("Component", () => {
 
         component.test = "test";
         expect(component.test).toBe("TEST");
+    });
+
+    // we allow executing functions on classes
+    test("object methods", () => {
+        const component = new Component({
+            test: () => "test",
+        });
+
+        expect(component.test()).toBe("test");
+    });
+
+    test("object methods that return values", () => {
+        const component = new Component({
+            sayHello: (name: string) => `Hello ${name}!`,
+        });
+
+        expect(component.sayHello("World")).toBe("Hello World!");
+    });
+
+    test("object methods that don't have enough arguments", () => {
+        const component = new Component({
+            sayHello: (name) => `Hello ${name}!`,
+        });
+
+        // we should be able to call a object method without all the arguments
+        // but the values should be undefined
+        // therefore, when we stringify it, we should see undefined in the
+        // stringified output
+        expect(component.sayHello()).toBe("Hello undefined!");
     });
 });

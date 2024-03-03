@@ -10,14 +10,16 @@ function identityFunction(x) {
 class Component {
   constructor(data) {
     const operatorFunctions = {};
-    Object.keys(data).forEach((key) => {
-      operatorFunctions[key] = isTypeOperatorFunction(data[key]) ? data[key] : identityFunction;
-    });
+    for (const key in data) {
+      if (Object.prototype.hasOwnProperty.call(data, key)) {
+        operatorFunctions[key] = isTypeOperatorFunction(data[key]) ? data[key] : identityFunction;
+      }
+    }
     const proxy = new Proxy(this, {
       get(target, prop) {
         const operatorFunction = operatorFunctions[prop];
         if (target[prop] === void 0) {
-          return void 0;
+          return operatorFunction;
         }
         return operatorFunction(target[prop]);
       },
@@ -50,7 +52,8 @@ class Component {
             element.innerHTML = domValue;
           });
         }
-        return true;
+        console.log("aaaa");
+        return privateValue;
       }
     });
     Object.assign(proxy, data);
