@@ -1,3 +1,5 @@
+import { executeTemplateChange, TemplateChange } from "./changes/changes";
+
 interface IComponent {
     [key: string]: any;
 }
@@ -8,8 +10,9 @@ type OperatorFunction<T> = (value: any) => T;
 // a type guard for the operator function
 // an operator function allows you to modify the value before it is set
 function isTypeOperatorFunction<T>(
-    value: T | OperatorFunction<T>
+    value: T | OperatorFunction<T>,
 ): value is OperatorFunction<T> {
+    // TODO: this should be more strict
     return typeof value === "function";
 }
 
@@ -83,32 +86,16 @@ class Component<T> implements IComponent {
                 if (isBrowser()) {
                     const key = prop.toString();
 
-                    // binding by document attributes (preferred)
-                    if (
-                        key.startsWith("#") ||
-                        key.startsWith(".") ||
-                        key.startsWith("[")
-                    ) {
-                        const elements: NodeListOf<HTMLElement> =
-                            document.querySelectorAll(key);
+                    // create a component change request
+                    const changeRequest: TemplateChange = { [key]: domValue };
 
-                        elements.forEach((element: HTMLElement) => {
-                            element.innerHTML = domValue;
-                        });
+                    const isTemplateStable: boolean =
+                        executeTemplateChange(changeRequest);
 
-                        return true;
+                    if (!isTemplateStable) {
+                        console.warn(`Template is unstable after change to ${key}`);
+                        console.warn("This may lead to bugs in your application.");
                     }
-
-                    // custom @key binded attributes
-                    // this is a special functionality case of 2.js
-                    // I personally don't like this, but it makes it much easier
-                    // to prototype solutions fast
-                    const modelElements = document.querySelectorAll(
-                        `[\\@${key}]`
-                    );
-                    modelElements.forEach((element) => {
-                        element.innerHTML = domValue;
-                    });
                 }
 
                 return true;

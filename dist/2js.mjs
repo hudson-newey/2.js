@@ -1,3 +1,38 @@
+function defaultOptimization(changes) {
+  const changesWithDomElements = changes.filter(
+    (change) => Object.keys(change).every(
+      (selector) => document.querySelector(domSelector(selector)) !== null
+    )
+  );
+  return changesWithDomElements;
+}
+function executeTemplateChange(change) {
+  const optimizedChange = optimizeChangeRequest(change);
+  return executeTemplateChangeCycle(optimizedChange);
+}
+function executeTemplateChangeCycle(changes) {
+  for (const change of changes) {
+    for (const [selector, template] of Object.entries(change)) {
+      const elements = templateElements(selector);
+      elements == null ? void 0 : elements.forEach((element) => {
+        element.innerHTML = template;
+      });
+    }
+  }
+  return true;
+}
+function optimizeChangeRequest(change, optimization = defaultOptimization) {
+  const changeCycles = Array.isArray(change) ? change : [change];
+  return optimization(changeCycles);
+}
+function domSelector(selector) {
+  const isDomSelector = selector.startsWith("#") || selector.startsWith(".") || selector.startsWith("[");
+  return isDomSelector ? selector : `[\\@${selector}]`;
+}
+function templateElements(selector) {
+  const twoJsSelector = domSelector(selector);
+  return document.querySelectorAll(twoJsSelector) ?? [];
+}
 function isTypeOperatorFunction(value) {
   return typeof value === "function";
 }
@@ -38,19 +73,8 @@ class Component {
         const domValue = (privateValue == null ? void 0 : privateValue.toString) ? privateValue.toString() : privateValue;
         if (isBrowser()) {
           const key = prop.toString();
-          if (key.startsWith("#") || key.startsWith(".") || key.startsWith("[")) {
-            const elements = document.querySelectorAll(key);
-            elements.forEach((element) => {
-              element.innerHTML = domValue;
-            });
-            return true;
-          }
-          const modelElements = document.querySelectorAll(
-            `[\\@${key}]`
-          );
-          modelElements.forEach((element) => {
-            element.innerHTML = domValue;
-          });
+          const changeRequest = { [key]: domValue };
+          executeTemplateChange(changeRequest);
         }
         return true;
       }
