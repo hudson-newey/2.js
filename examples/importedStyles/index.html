@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2.js - Imported Component with CSS</title>
-    <script src="../../dist/2js.mjs"></script>
-    <script src="./inputComponent/inputComponent.js"></script>
 </head>
 
 <body>
     <input-component @inputComponent></input-component>
 
-    <script>
-        const app = new Component({
+    <script type="module">
+        import { Component } from "/src/2js.ts";
+        import { inputComponent } from "./inputComponent/inputComponent";
+
+        new Component({
             inputComponent: inputComponent.template,
         });
     </script>
 </body>
+
 </html>

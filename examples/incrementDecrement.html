@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2.js - Increment-Decrement Example</title>
-    <script src="../dist/2js.mjs"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <h1>Increment-Decrement Example</h1>
     <p>Count: <span id="count-output"></span></p>
-    <button onclick="app['#count-output']++">Increment</button>
-    <button onclick="app['#count-output']--">Decrement</button>
+    <button onclick="window.app['#count-output']++">Increment</button>
+    <button onclick="window.app['#count-output']--">Decrement</button>
 
-    <script>
-      const app = new Component({
-        "#count-output": 0,
-      });
+    <script type="module">
+        import { Component } from "/src/2js.ts";
+
+        window.app = new Component({
+            "#count-output": 0,
+        });
     </script>
-  </body>
+</body>
+
 </html>

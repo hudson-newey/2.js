@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2.js - "JSX Like" For Loops</title>
-    <script src="../dist/2js.mjs"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <h1>My Shopping List</h1>
 
     <div @shoppingListTemplate></div>
 
-    <script>
-      const shoppingItems = [
-        "bread",
-        "milk",
-        "eggs",
-        "cheese",
-        "butter",
-        "chicken",
-      ];
+    <script type="module">
+        import { Component } from "/src/2js.ts";
 
-      const app = new Component({
-        shoppingListTemplate: `
+        const shoppingItems = [
+            "bread",
+            "milk",
+            "eggs",
+            "cheese",
+            "butter",
+            "chicken",
+        ];
+
+        new Component({
+            shoppingListTemplate: `
             <ul>
                 ${shoppingItems.map((item) => "<li>" + item + "</li>").join("")}
             </ul>
         `,
-      });
+        });
     </script>
-  </body>
+</body>
+
 </html>

@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2.js - Double Number</title>
-    <script src="../dist/2js.mjs"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <label for="number-input"></label>
-    <input
-      id="number-input"
-      type="number"
-      onchange="app.numberOutput = event.target.value"
-      oninput="app.numberOutput = event.target.value"
-    />
+    <input id="number-input" type="number" onchange="window.app.numberOutput = event.target.value"
+        oninput="app.numberOutput = event.target.value" />
 
     <h1>Double your number is: <span @numberOutput></span></h1>
 
     <p>This demonstration shows how functions can be used on passed values</p>
 
-    <script>
-      const app = new Component({
-        numberOutput: (x) => x * 2,
-      });
+    <script type="module">
+        import { Component } from "/src/2js.ts";
+
+        window.app = new Component({
+            numberOutput: (x) => x * 2,
+        });
     </script>
-  </body>
+</body>
+
 </html>

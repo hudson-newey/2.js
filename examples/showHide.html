@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2.js - Show Hide</title>
-    <script src="../dist/2js.mjs"></script>
 </head>
 
 <body>
-    <button onclick="toggleElement()">Click Me</button>
+    <button onclick="window.app.toggleElement()">Click Me</button>
     <div @collapsableElement></div>
 
-    <script>
-        function toggleElement() {
-            if (app.collapsableElement) {
-                app.collapsableElement = null;
-            } else {
-                app.collapsableElement = "<h1>Hello World</h1>";
-            }
-        }
+    <script type="module">
+        import { Component } from "/src/2js.ts";
 
-        const app = new Component({
+        window.app = new Component({
             collapsableElement: null,
+            toggleElement: () => {
+                if (window.app.collapsableElement) {
+                    app.collapsableElement = null;
+                } else {
+                    window.app.collapsableElement = "<h1>Hello World</h1>";
+                }
+            }
         });
     </script>
 </body>
+
 </html>

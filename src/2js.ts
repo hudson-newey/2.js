@@ -30,7 +30,7 @@ function identityFunction<T>(x: T): T {
  *
  * Reactive state that can be bound to DOM elements
  */
-class Component<T> implements IComponent {
+export class Component<T> implements IComponent {
     public constructor(data: ComponentData<T>) {
         const operatorFunctions: Record<string, OperatorFunction<T>> = {};
 
@@ -108,5 +108,3 @@ class Component<T> implements IComponent {
         return proxy;
     }
 }
-
-module.exports = Component;

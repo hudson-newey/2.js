@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2.js - Data Binding</title>
-    <script src="../dist/2js.mjs"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <label for="name-input"></label>
-    <input
-      id="name-input"
-      type="text"
-      onkeyup="app.name = event.target.value"
-    />
+    <input id="name-input" type="text" onkeyup="window.app.name = event.target.value" />
 
     <h1>Hello <span @name></span></h1>
 
-    <script>
-      const app = new Component({
-        name: "",
-      });
+    <script type="module">
+        import { Component } from "/src/2js.ts";
+
+        window.app = new Component({
+            name: "",
+        });
     </script>
-  </body>
+</body>
+
 </html>

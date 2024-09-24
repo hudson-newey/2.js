@@ -17,8 +17,8 @@
     "noEmit": true,
     "removeComments": true,
     "sourceMap": false,
-    "declaration": true,
-    "declarationMap": true,
+    "declaration": false,
+    "declarationMap": false,
 
     /* Linting */
     "strict": true,

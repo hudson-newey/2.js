@@ -1,44 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2.js - SPA</title>
-    <script src="../dist/2js.mjs"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <main>
-      <nav>
-        <button onclick="app.setPage(homePage)">Home</button>
-        <button onclick="app.setPage(aboutPage)">About</button>
-      </nav>
+        <nav>
+            <button onclick="window.app.home()">Home</button>
+            <button onclick="window.app.about()">About</button>
+        </nav>
 
-      <div>
-        <h1 @name></h1>
-        <p @description></p>
-      </div>
+        <div>
+            <h1 @name></h1>
+            <p @description></p>
+        </div>
     </main>
 
-    <script>
-      const homePage = {
-        name: "Home",
-        description: "This is the home page",
-      };
+    <script type="module">
+        import { Component } from "/src/2js.ts";
 
-      const aboutPage = {
-        name: "About",
-        description: "About this company",
-      };
+        const homePage = {
+            name: "Home",
+            description: "This is the home page",
+        };
 
-      const app = new Component({
-        name: homePage.name,
-        description: homePage.description,
-        setPage: (value) => {
-          app.name = value.name;
-          app.description = value.description;
-        },
-      });
+        const aboutPage = {
+            name: "About",
+            description: "About this company",
+        };
+
+        window.app = new Component({
+            name: homePage.name,
+            description: homePage.description,
+            setPage: (value) => {
+                window.app.name = value.name;
+                window.app.description = value.description;
+            },
+            home: () => window.app.setPage(homePage),
+            about: () => window.app.setPage(aboutPage),
+        });
     </script>
-  </body>
+</body>
+
 </html>

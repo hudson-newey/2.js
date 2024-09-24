@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>2.js - Imported Component with CSS</title>
-        <script src="../dist/2js.mjs"></script>
-    </head>
 
-    <body>
-        <h1>Input text to convert to upper case</h1>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.js - Imported Component with CSS</title>
+</head>
 
-        <!-- When assigning a value to a component, the new value will be returned -->
-        <!--
-            TODO: This is not currently functional for operator functions
-            But works everywhere else
-        -->
-        <input
-            type="text"
-            placeholder="Input text..."
-            onkeyup="console.log(app.value = event.target.value)"
-        />
+<body>
+    <h1>Input text to convert to upper case</h1>
 
-        <div style="margin-top: 2rem">
-            <strong>Your upper case text is</strong>
-            <p @value></p>
-        </div>
+    <!--
+        When assigning a value to a component, the new value will be returned
+        to demonstrate this, I have logged the returned value to the console
+     -->
+    <input type="text" placeholder="Input text..." onkeyup="console.log(window.app.value = event.target.value)" />
 
-        <script>
-            // app.value has an operator function that will convert the text to uppercase
-            const app = new Component({
-                value: (text) => text.toUpperCase(),
-            });
-        </script>
-    </body>
+    <div style="margin-top: 2rem">
+        <strong>Your upper case text is</strong>
+        <p @value></p>
+    </div>
+
+    <script type="module">
+        import { Component } from "/src/2js.ts";
+
+        // app.value has an operator function that will convert the text to uppercase
+        window.app = new Component({
+            value: (text) => text.toUpperCase(),
+        });
+    </script>
+</body>
+
 </html>
