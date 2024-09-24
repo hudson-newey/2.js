@@ -1,0 +1,14 @@
+.git/
+tests/
+node_modules/
+examples/
+docs/
+.vscode/
+
+.gitignore
+
+.editorconfig
+index.html
+
+vite.config.ts
+src/vite-env.d.ts

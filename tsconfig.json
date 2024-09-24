@@ -3,17 +3,17 @@
   "exclude": ["node_modules", "**/*.spec.ts", "dist/", "*.d.ts"],
   "compilerOptions": {
     "baseUrl": "./",
-    "target": "ESNext",
     "useDefineForClassFields": true,
-    "module": "commonjs",
-    "lib": ["ES2022", "DOM"],
+    "module": "None",
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
     "outDir": "dist/",
     "newLine": "lf",
 
     /* Bundler mode */
     "allowImportingTsExtensions": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noEmit": true,
     "removeComments": true,
     "sourceMap": false,
@@ -28,4 +28,3 @@
     "noImplicitAny": true,
   },
 }
-
