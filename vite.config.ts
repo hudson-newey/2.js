@@ -7,7 +7,7 @@ export default defineConfig({
         lib: {
             name: "2js",
             fileName: "2js",
-            entry: "src/2js.ts",
+            entry: "src/index.ts",
             formats: ["es", "cjs", "umd"],
         },
         minify: "terser",

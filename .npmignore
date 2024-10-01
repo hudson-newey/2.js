@@ -1,3 +1,5 @@
+src/
+
 .git/
 tests/
 node_modules/
@@ -10,5 +12,9 @@ docs/
 .editorconfig
 index.html
 
-vite.config.ts
+vite.config.ts*
 src/vite-env.d.ts
+
+jest.config.js
+
+tsconfig.json
