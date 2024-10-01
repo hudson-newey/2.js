@@ -4,13 +4,13 @@ interface IComponent {
     [key: string]: any;
 }
 
-type ComponentData<T> = Record<string, T>;
+type ComponentData<T> = T;
 type OperatorFunction<T> = (value: any) => T;
 
 // a type guard for the operator function
 // an operator function allows you to modify the value before it is set
 function isTypeOperatorFunction<T>(
-    value: T | OperatorFunction<T>,
+    value: T | OperatorFunction<T>
 ): value is OperatorFunction<T> {
     // TODO: this should be more strict
     return typeof value === "function";
@@ -23,22 +23,23 @@ function isBrowser(): boolean {
 function identityFunction<T>(x: T): T {
     return x;
 }
-
 /**
  * @name Component
  * @interface IComponent
  *
  * Reactive state that can be bound to DOM elements
  */
-export class Component<T> implements IComponent {
+export class Component<T extends IComponent> {
+    [key: string]: any;
+
     public constructor(data: ComponentData<T>) {
-        const operatorFunctions: Record<string, OperatorFunction<T>> = {};
+        const operatorFunctions: Record<string, OperatorFunction<keyof T>> = {};
 
         for (const key in data) {
             if (Object.prototype.hasOwnProperty.call(data, key)) {
                 operatorFunctions[key] = isTypeOperatorFunction(data[key])
-                    ? (data[key] as OperatorFunction<T>)
-                    : identityFunction<T>;
+                    ? (data[key] as OperatorFunction<keyof T>)
+                    : identityFunction<keyof T>;
             }
         }
 

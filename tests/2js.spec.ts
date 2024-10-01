@@ -1,8 +1,6 @@
 import { describe } from "@jest/globals";
 import { test, expect } from "@jest/globals";
-
-// TODO: I need to figure a way to make this nicer to work with bundlers
-const Component = require("../src/2js");
+import { Component } from "../src/2js";
 
 describe("Component", () => {
     test("creation", () => {
@@ -134,7 +132,7 @@ describe("Component", () => {
 
     test("object methods that don't have enough arguments", () => {
         const component = new Component({
-            sayHello: (name) => `Hello ${name}!`,
+            sayHello: (name: string) => `Hello ${name}!`,
         });
 
         // we should be able to call a object method without all the arguments
