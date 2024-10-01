@@ -1,5 +1,6 @@
 dist/
 
+vite.config.ts.timestamp*
 node_modules/
 .node_modules/
 built/*

@@ -14,6 +14,7 @@
 
     <script type="module">
         import { Component } from "/src/2js.ts";
+        import { map } from "/src/helpers/map.ts";
 
         const shoppingItems = [
             "bread",
@@ -27,7 +28,7 @@
         new Component({
             shoppingListTemplate: `
             <ul>
-                ${shoppingItems.map((item) => "<li>" + item + "</li>").join("")}
+                ${map(shoppingItems, (item) => "<li>" + item + "</li>")}
             </ul>
         `,
         });

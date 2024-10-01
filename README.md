@@ -64,7 +64,7 @@ OR
     const app = new Component({
         shoppingListTemplate: `
             <ul>
-                ${shoppingItems.map((item) => "<li>" + item + "</li>").join("")}
+                ${map(shoppingItems, (item) => `<li>${item}</li>`)}
             </ul>
         `,
     });
@@ -144,7 +144,7 @@ OR
         // because this is technically a value, it can have DOM bindings
         todoListTemplate: (incomingTodoItems) => `
             <ul>
-                ${app.todoItems.map((item) => "<li>" + item + "</li>").join("")}
+                ${map(app.todoItems, (item) => `<li>${item}</li>`)}
             </ul>
         `,
     });

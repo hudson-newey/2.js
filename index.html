@@ -13,6 +13,7 @@
 
     <script type="module">
         import { Component } from "/src/2js.ts";
+        import { map } from "/src/helpers/map.ts";
 
         const pages = [
             "/examples/dataBinding.html",
@@ -27,11 +28,11 @@
         ];
 
         new Component({
-            items: `${pages.map(page => `
+            items: `${map(pages, (page) => `
                 <li>
                     <a href="${page}">${page}</a>
                 </li>
-            `).join('')}`,
+            `)}`,
         });
     </script>
 </body>

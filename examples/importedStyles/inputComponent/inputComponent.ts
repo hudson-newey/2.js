@@ -1,4 +1,5 @@
 import { Component } from "../../../src/2js";
+import { map } from "../../../src/helpers/map";
 
 // used to demonstrate for loops in templates
 const styles = [
@@ -10,9 +11,7 @@ export const inputComponent = new Component({
   template: `
         ${
             // "JSX like" style templating
-            styles.map(
-                (styleUrl) => "<link rel='stylesheet' href='" + styleUrl + "' />"
-            ).join("")
+            map(styles, (styleUrl) => `<link rel="stylesheet" href="${styleUrl}" />`)
         }
         <input class="customInputComponent" type="text" placeholder="Enter your name" />
     `,

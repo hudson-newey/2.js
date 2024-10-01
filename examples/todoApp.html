@@ -20,6 +20,7 @@
 
     <script type="module">
         import { Component } from "/src/2js.ts";
+        import { map } from "/src/helpers/map.ts";
 
         window.app = new Component({
             todoItems: [],
@@ -40,11 +41,7 @@
             // because this is technically a value, it can have DOM bindings
             todoListTemplate: (incomingTodoItems) => `
                     <ul>
-                        ${
-                            window.app.todoItems
-                            .map((item) => "<li>" + item + "</li>")
-                            .join("")
-                        }
+                        ${map(window.app.todoItems, (item) => `<li>${item}</li>`)}
                     </ul>
                 `,
         });

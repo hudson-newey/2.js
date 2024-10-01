@@ -2,7 +2,7 @@
     "name": "@hudson-newey/2.js",
     "version": "0.0.5",
     "description": "A highly efficient library to bring reactive state to JavaScript with minimal overhead and bundle size",
-    "main": "src/2js.ts",
+    "main": "src/index.ts",
     "type": "module",
     "scripts": {
         "dev": "vite",
