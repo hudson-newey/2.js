@@ -1,38 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>2.js - "JSX Like" For Loops</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2.js - "JSX Like" For Loops</title>
-</head>
+    <body>
+        <h1>My Shopping List</h1>
 
-<body>
-    <h1>My Shopping List</h1>
+        <div @shoppingListTemplate></div>
 
-    <div @shoppingListTemplate></div>
+        <script type="module">
+            import { Component } from "/src/2js.ts";
+            import { map } from "/src/helpers/map.ts";
 
-    <script type="module">
-        import { Component } from "/src/2js.ts";
-        import { map } from "/src/helpers/map.ts";
+            const shoppingItems = [
+                "bread",
+                "milk",
+                "eggs",
+                "cheese",
+                "butter",
+                "chicken",
+            ];
 
-        const shoppingItems = [
-            "bread",
-            "milk",
-            "eggs",
-            "cheese",
-            "butter",
-            "chicken",
-        ];
-
-        new Component({
-            shoppingListTemplate: `
+            new Component({
+                shoppingListTemplate: `
             <ul>
                 ${map(shoppingItems, (item) => "<li>" + item + "</li>")}
             </ul>
         `,
-        });
-    </script>
-</body>
-
+            });
+        </script>
+    </body>
 </html>

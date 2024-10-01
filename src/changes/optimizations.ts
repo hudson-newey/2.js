@@ -8,5 +8,5 @@ export type ChangeOptimization = (
 export function defaultOptimization(
     changes: TemplateChangeCycle,
 ): TemplateChangeCycle {
-   return changes;
+    return changes;
 }

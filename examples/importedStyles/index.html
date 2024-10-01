@@ -1,23 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>2.js - Imported Component with CSS</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2.js - Imported Component with CSS</title>
-</head>
+    <body>
+        <input-component @inputComponent></input-component>
 
-<body>
-    <input-component @inputComponent></input-component>
+        <script type="module">
+            import { Component } from "/src/2js.ts";
+            import { inputComponent } from "./inputComponent/inputComponent";
 
-    <script type="module">
-        import { Component } from "/src/2js.ts";
-        import { inputComponent } from "./inputComponent/inputComponent";
-
-        new Component({
-            inputComponent: inputComponent.template,
-        });
-    </script>
-</body>
-
+            new Component({
+                inputComponent: inputComponent.template,
+            });
+        </script>
+    </body>
 </html>

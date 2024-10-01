@@ -40,7 +40,9 @@ OR
     const app = new Component({
         collapsableElement: null,
         toggleElement: () =>
-            app.collapsableElement = app.collapsableElement ? null : "<h1>Hello World</h1>",
+            (app.collapsableElement = app.collapsableElement
+                ? null
+                : "<h1>Hello World</h1>"),
     });
 </script>
 ```

@@ -1,0 +1,19 @@
+{
+    "root": true,
+    "rules": {
+        "strict": "error"
+    },
+    "overrides": [
+        {
+            "extends": [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/strict"
+            ],
+            "files": ["*.ts"],
+            "rules": {
+                "@typescript-eslint/no-explicit-any": "off",
+                "@typescript-eslint/no-extraneous-class": "off"
+            }
+        }
+    ]
+}

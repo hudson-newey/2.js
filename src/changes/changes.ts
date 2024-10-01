@@ -39,9 +39,7 @@ function optimizeChangeRequest(
     change: TemplateChange | TemplateChangeCycle,
     optimization: ChangeOptimization = defaultOptimization,
 ): TemplateChangeCycle {
-    const changeCycles = Array.isArray(change)
-        ? change
-        : [change];
+    const changeCycles = Array.isArray(change) ? change : [change];
 
     return optimization(changeCycles);
 }
@@ -55,9 +53,7 @@ export function domSelector(selector: TemplateSelector): TemplateSelector {
     return isDomSelector ? selector : `[\\@${selector}]`;
 }
 
-function templateElements(
-    selector: TemplateSelector,
-): NodeListOf<HTMLElement> {
+function templateElements(selector: TemplateSelector): NodeListOf<HTMLElement> {
     const twoJsSelector = domSelector(selector);
     return document.querySelectorAll(twoJsSelector) ?? [];
 }

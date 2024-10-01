@@ -144,13 +144,9 @@ describe("Component", () => {
 
     test("javascript string templates", () => {
         const component = new Component({
-            shoppingList: [
-                "Milk",
-                "Eggs",
-                "Bread",
-                "Butter",
-            ],
-            template: (shoppingList: string[]) => `Shopping list: ${shoppingList.join(", ")}`,
+            shoppingList: ["Milk", "Eggs", "Bread", "Butter"],
+            template: (shoppingList: string[]) =>
+                `Shopping list: ${shoppingList.join(", ")}`,
         });
 
         expect(component.template(component.shoppingList)).toBe(

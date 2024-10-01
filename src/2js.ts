@@ -10,7 +10,7 @@ type OperatorFunction<T> = (value: any) => T;
 // a type guard for the operator function
 // an operator function allows you to modify the value before it is set
 function isTypeOperatorFunction<T>(
-    value: T | OperatorFunction<T>
+    value: T | OperatorFunction<T>,
 ): value is OperatorFunction<T> {
     // TODO: this should be more strict
     return typeof value === "function";
@@ -55,7 +55,6 @@ export class Component<T extends IComponent> {
 
                 return operatorFunction(target[prop as keyof typeof target]);
             },
-            //@ts-ignore
             set(target, prop, value) {
                 if (!(prop in operatorFunctions)) {
                     operatorFunctions[prop as keyof typeof operatorFunctions] =
@@ -94,8 +93,12 @@ export class Component<T extends IComponent> {
                         executeTemplateChange(changeRequest);
 
                     if (!isTemplateStable) {
-                        console.warn(`Template is unstable after change to ${key}`);
-                        console.warn("This may lead to bugs in your application.");
+                        console.warn(
+                            `Template is unstable after change to ${key}`,
+                        );
+                        console.warn(
+                            "This may lead to bugs in your application.",
+                        );
                     }
                 }
 

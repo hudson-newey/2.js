@@ -1,51 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>2.js - Todo App</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2.js - Todo App</title>
-</head>
+    <body>
+        <h1>Add Todo Item</h1>
 
-<body>
-    <h1>Add Todo Item</h1>
+        <input
+            id="taskNameInput"
+            type="text"
+            onkeyup="((e) => e.key === 'Enter' && window.app.addTodoItem())(event)"
+        />
+        <button onclick="window.app.addTodoItem()">Add Todo Item</button>
 
-    <input id="taskNameInput" type="text" onkeyup="((e) => e.key === 'Enter' && window.app.addTodoItem())(event)" />
-    <button onclick="window.app.addTodoItem()">Add Todo Item</button>
+        <div>
+            <h2>Todo Items</h2>
+            <div @todoListTemplate></div>
+        </div>
 
-    <div>
-        <h2>Todo Items</h2>
-        <div @todoListTemplate></div>
-    </div>
+        <script type="module">
+            import { Component } from "/src/2js.ts";
+            import { map } from "/src/helpers/map.ts";
 
-    <script type="module">
-        import { Component } from "/src/2js.ts";
-        import { map } from "/src/helpers/map.ts";
+            window.app = new Component({
+                todoItems: [],
+                addTodoItem: () => {
+                    if (!taskNameInput.value) return;
 
-        window.app = new Component({
-            todoItems: [],
-            addTodoItem: () => {
-                if (!taskNameInput.value) return;
+                    window.app.todoItems.push(taskNameInput.value);
 
-                window.app.todoItems.push(taskNameInput.value);
-
-                // in the regular DOM model, whenever an element on the document is created with an id
-                // eg. <input id="taskNameInput" />
-                // a variable is created in the global scope with the same name as the id
-                // this variable can be used to access the element directly without document.getElementById()
-                window.app.todoListTemplate = window.app.todoItems;
-                taskNameInput.value = "";
-            },
-            // this value has an "operator function"
-            // that means that any values assigned to it will be passed through the function first
-            // because this is technically a value, it can have DOM bindings
-            todoListTemplate: (incomingTodoItems) => `
+                    // in the regular DOM model, whenever an element on the document is created with an id
+                    // eg. <input id="taskNameInput" />
+                    // a variable is created in the global scope with the same name as the id
+                    // this variable can be used to access the element directly without document.getElementById()
+                    window.app.todoListTemplate = window.app.todoItems;
+                    taskNameInput.value = "";
+                },
+                // this value has an "operator function"
+                // that means that any values assigned to it will be passed through the function first
+                // because this is technically a value, it can have DOM bindings
+                todoListTemplate: (incomingTodoItems) => `
                     <ul>
                         ${map(window.app.todoItems, (item) => `<li>${item}</li>`)}
                     </ul>
                 `,
-        });
-    </script>
-</body>
-
+            });
+        </script>
+    </body>
 </html>

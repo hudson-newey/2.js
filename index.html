@@ -1,40 +1,41 @@
 <!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>2.js testing environment</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2.js testing environment</title>
-</head>
+    <body>
+        <h1>2.JS</h1>
+        <ul @items></ul>
 
-<body>
-    <h1>2.JS</h1>
-    <ul @items></ul>
+        <script type="module">
+            import { Component } from "/src/2js.ts";
+            import { map } from "/src/helpers/map.ts";
 
-    <script type="module">
-        import { Component } from "/src/2js.ts";
-        import { map } from "/src/helpers/map.ts";
+            const pages = [
+                "/examples/dataBinding.html",
+                "/examples/doubleNumber.html",
+                "/examples/incrementDecrement.html",
+                "/examples/jsxLikeForLoops.html",
+                "/examples/showHide.html",
+                "/examples/spa.html",
+                "/examples/todoApp.html",
+                "/examples/toUpperCase.html",
+                "/examples/importedStyles/index.html",
+            ];
 
-        const pages = [
-            "/examples/dataBinding.html",
-            "/examples/doubleNumber.html",
-            "/examples/incrementDecrement.html",
-            "/examples/jsxLikeForLoops.html",
-            "/examples/showHide.html",
-            "/examples/spa.html",
-            "/examples/todoApp.html",
-            "/examples/toUpperCase.html",
-            "/examples/importedStyles/index.html",
-        ];
-
-        new Component({
-            items: `${map(pages, (page) => `
+            new Component({
+                items: `${map(
+                    pages,
+                    (page) => `
                 <li>
                     <a href="${page}">${page}</a>
                 </li>
-            `)}`,
-        });
-    </script>
-</body>
-
+            `,
+                )}`,
+            });
+        </script>
+    </body>
 </html>
