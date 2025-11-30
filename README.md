@@ -1,5 +1,7 @@
 # 2.js
 
+**2.js has been refactored into a 2web package <https://github.com/hudson-newey/2web/tree/main/packages/2js>**
+
 A highly efficient library to bring reactive state to JavaScript with minimal overhead and bundle size that can be imported via HTML `<script src="">` tags.
 
 ### Minimal Increment-Decrement Counter
